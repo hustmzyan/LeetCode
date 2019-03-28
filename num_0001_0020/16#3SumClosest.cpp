@@ -19,7 +19,7 @@ public:
         sort(nums.begin(), nums.end());
         int result = 0;
         int distance= INT_MAX;
-        for (auto i = 0; i < nums.size() - 2; ++i) {
+        for (int i = 0; i < nums.size() - 2; ++i) {
             
             int j = i + 1;
             int k = (int)(nums.size() - 1);
