@@ -14,11 +14,12 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int> > threeSum(vector<int>& nums) {
+        vector<vector<int> > results;
         if (nums.size() < 3)
-            return {};
+            return results;
         
         sort(nums.begin(), nums.end());
-        vector<vector<int> > results;
+        // vector<vector<int> > results;
         for (int i = 0; i < nums.size() - 2; ++i) {
             if (i > 0 && nums[i] == nums[i-1])
                 continue;
@@ -28,8 +29,13 @@ public:
             
             while (j < k) {
                 int sum = nums[i] + nums[j] + nums[k];
-                if (sum == 0)
-                    results.push_back({nums[i], nums[j], nums[k]});
+                if (sum == 0){
+                    vector<int> temp;
+                    temp.push_back(nums[i]);
+                    temp.push_back(nums[j]);
+                    temp.push_back(nums[k]);
+                    results.push_back(temp);
+                }
                 if (sum <= 0)
                     do { ++j; } while (j < k && nums[j] == nums[j - 1]);
                 if (sum >= 0)
