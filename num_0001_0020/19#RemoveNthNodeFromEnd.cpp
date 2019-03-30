@@ -37,20 +37,33 @@ public:
 };
 
 int main(){
-    ListNode* list = NULL;
-    ListNode* head = list;
-    for(int i = 0; i < 5; i++){
-        list->val = i;
-        ListNode* Nex = list->next;
-        list = Nex;
-    }
+    ListNode node1(1);
+    ListNode node2(2);
+    ListNode node3(3);
+    ListNode node4(4);
+    ListNode node5(5);
 
-    ListNode* temp = head;
-    while(temp){
-        cout << temp->val << " ";
-        temp = temp->next;
+    node1.next = &node2;
+    node2.next = &node3;
+    node3.next = &node4;
+    node4.next = &node5;
+
+    int n = 2;
+
+    Solution s;
+
+    ListNode* res = NULL;
+    res = s.removeNthFromEnd(&node1, n);
+
+    while(res){
+        cout << res->val;
+        if(res->next){
+            cout << "->";
+        }
+        res = res->next;
     }
     
+    cout << endl;
 
     return 0;
 }
