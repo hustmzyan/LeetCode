@@ -18,6 +18,15 @@ public:
         ListNode* res;
         ListNode* cur;
         bool flag = true;
+        if(l1 == NULL && l2){
+            return l2;
+        }
+        if(l2 == NULL && l1){
+            return l1;
+        }
+        if(l1 == NULL && l1 == NULL){
+            return NULL;
+        }
         while(l1 && l2){
             if(l1->val <= l2->val){
                 if(flag){
