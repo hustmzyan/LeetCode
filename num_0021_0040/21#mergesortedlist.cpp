@@ -18,7 +18,7 @@ public:
         ListNode* res;
         ListNode* cur;
         bool flag = true;
-        while(l1->next && l2->next){
+        while(l1 && l2){
             if(l1->val <= l2->val){
                 if(flag){
                     res = l1;
@@ -43,13 +43,15 @@ public:
             }
             
         }
-        while(l1->next){
+        while(l1){
             cur->next = l1;
             cur = l1;
+            l1 = l1->next;
         }
-        while(l2->next){
+        while(l2){
             cur->next = l2;
             cur = l2;
+            l2 = l2->next;
         }
 
         return res;
@@ -74,9 +76,10 @@ int main(){
     ListNode* result;
     result = s.mergeTwoLists(&node1_1, &node2_1);
 
-    while(result->next){
+    while(result){
         cout << result->val << "->";
+        result = result->next;
     }
-    cout << endl;
+    cout << "NULL" << endl;
     return 0;
 }
