@@ -10,27 +10,28 @@ using namespace std;
 class Solution {
 public:
     int strStr(string haystack, string needle) {
+        // 匹配子串为空情况
         if(needle.length() == 0)
             return 0;
+        // 主串和模式串等长，直接判断
         int l1 = haystack.length();
         int l2 = needle.length();
-        int j=0, m=0;
+        int j = 0, m=0;
         if(l1 == l2){
             if(haystack.compare(needle) == 0)
                 return 0;
             else
                 return -1;
         }
+        // 一般情况
         for(int i=0; i<=l1-l2; i++){
             if(haystack[i] == needle[0]){
-                for(j=i, m=0; j<i+l2&&m<l2; j++, m++){
+                for(j = i, m=0; m<l2; j++, m++){
                     if(haystack[j] != needle[m]){
-                        j = 0;
-                        m = 0;
                         break;
                     }
                 }
-                if(m == l2 && haystack[j-1] == needle[l2-1])
+                if(m == l2)
                     return i;
             }
         }
@@ -40,8 +41,8 @@ public:
 
 int main(){
 
-    string Str = "ababac";
-    string str = "bac";
+    string Str = "mississippi";
+    string str = "issi";
 
     // cout << str.length() << endl;
 
