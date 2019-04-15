@@ -10,57 +10,74 @@
 
 #include <stdio.h>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <iostream>
 using namespace std;
 
 class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {
-        vector<int> res; 
-        if(s==""||words.size()==0)
-            return res;
-        map<string,int> m;
-        int n=s.length();
-        int len=words[0].length();
-        int count=words.size();
-        for(int i=0;i<count;i++){
-            m[words[i]]++;
+        vector<int> ret;
+        if(words.empty()){
+            return ret;
         }
-        int k=len*count; 
-        for(int i=0;i<=n-k;i++)
-        {
-            bool flag=true;
-            map<string,int> temp=m; 
-            string cur="";
-            int count=0;
-            for(int j=0;j<k;j++)
-            {
-                cur+=s[i+j];
-                count++;
-                if(count==len)
-                {
-                    temp[cur]--;
-                    cur="";
-                    count=0;
+        // k:子串长度
+        int k = words[0].size(), start = 0;
+        // 初始化计数unordered_map
+        unordered_map<string, int> dict;
+        for(auto s:words){
+            dict[s]++;
+        }
+        // 以模式串长度取offset 0、1、2、...、k-1
+        while(start < k){
+            // vis:已经使用的子串计数unordered_map cnts:剩余未匹配子串个数
+            unordered_map<string, int> vis;
+            int cnts = words.size(), i = start;
+
+            // 从主串下标开始遍历
+            while(i < s.size()){
+                // 取下标为i、长度为k的子串
+                string t = s.substr(i, k);
+                // 若dict中t子串不存在，初始化判断参数，滑动窗口
+                if(!dict.count(t)){
+                    vis.clear();
+                    cnts = words.size();
                 }
+                // 当前子串t，已经使用完，回退
+                else if(vis[t] == dict[t]){
+                    // 从匹配起始下标开始，恢复判断参数，遇到t子串终止
+                    for(int j = i - (words.size() - cnts) * k; s.substr(j, k) != t; j += k){
+                        vis[s.substr(j, k)]--;
+                        cnts++;
+                    }
+                }
+                else {
+                    // 满足t子串匹配条件，滑动窗口
+                    vis[t]++;
+                    cnts--;
+                    // 满足最终条件，下标压到结果栈，滑动窗口
+                    if(cnts == 0){
+                        ret.push_back(i - (words.size() - 1) * k);
+                        // 往前滑动一个k长度窗口
+                        vis[s.substr(i - (words.size() - 1) * k, k)]--;
+                        cnts = 1;
+                    }
+                }
+                i += k;
             }
-            for(auto it=temp.begin();it!=temp.end();it++){
-                if(it->second>0)
-                    flag=false;
-            }
-            if(flag)
-                res.push_back(i);
+            start++;
         }
-        return res;
+        return ret;
     }
 };
 
 int main(){
-    string s = "barfoothefoobarman";
+    string s = "wordgoodgoodgoodbestword";
     vector<string> words;
-    words.push_back("foo");
-    words.push_back("bar");
+    words.push_back("word");
+    words.push_back("good");
+    words.push_back("best");
+    words.push_back("good");
 
     Solution solu;
     vector<int> res = solu.findSubstring(s, words);
