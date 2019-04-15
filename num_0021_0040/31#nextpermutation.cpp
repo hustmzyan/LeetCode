@@ -21,22 +21,27 @@ using namespace std;
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
+        // 从后往前找nums[i-1]<nums[i]
         for(int i = nums.size()-1; i > 0; i--){
             if(nums[i] > nums[i-1]){
                 int validSwap = nums[i];
                 int validInt = i;
+                // 正向扫描，寻找比nums[i-1]大一位的数
                 for(int j = i; j < nums.size(); j++){
                     if(validSwap > nums[j] && nums[j] > nums[i-1]){
                         validSwap = nums[j];
                         validInt = j;
                     }
                 }
+                // 交换
                 nums[validInt] = nums[i - 1];
                 nums[i - 1] = validSwap;
+                // nums[i-1]之后的数重排
                 sort(nums.begin()+i, nums.end());
                 return;
             }
         }
+        // 完全逆序情况，直接重排
         sort(nums.begin(), nums.end());
     }
 };
