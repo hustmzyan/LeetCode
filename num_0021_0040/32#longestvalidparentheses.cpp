@@ -23,7 +23,7 @@ public:
             else if ((stk.empty() || s[stk.top()] != '(') && s[i] == ')')
                 stk.push(i);
             else if (s[stk.top()] == '(' && s[i] == ')')
-             stk.pop();
+                stk.pop();
          }
     
         int len = 0, prev_idx = n;
