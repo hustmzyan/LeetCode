@@ -19,25 +19,26 @@ using namespace std;
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        bool flag = false;
         vector<int> res;
-        int last_index = -1;
-        for(int i = 0; i < nums.size(); i++){
-            if(nums[i] == target && !flag){
-                res.push_back(i);
-                flag = true;
-            } else if(nums[i] == target && flag){
-                last_index = i;
+        int front = 0;
+        int rear = nums.size() - 1;
+        int mid, first_index, last_index;
+        while(front <= rear){
+            mid = (front + rear) / 2;
+            if(target > nums[mid]){
+                front = mid + 1;
+            } else if(target < nums[mid]){
+                rear = mid - 1;
+            } else{
+                for(last_index = mid; last_index < nums.size() && nums[last_index] == target; last_index++);
+                for(first_index = mid; first_index > -1 && nums[first_index] == target; first_index--);
+                res.push_back(first_index + 1);
+                res.push_back(last_index - 1);
+                return res;
             }
         }
-        if(!flag){
-            res.push_back(-1);
-            res.push_back(-1);
-        }else if(flag && last_index == -1){
-            res.push_back(res[0]);
-        }else{
-            res.push_back(last_index);
-        }
+        res.push_back(-1);
+        res.push_back(-1);
         return res;
     }
 };
