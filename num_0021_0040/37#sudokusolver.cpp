@@ -10,11 +10,11 @@ using namespace std;
 
 class Solution {
 public:
-    void solveSudoku(vector<vector<char> >& board) {
+    void solveSudoku(vector<vector<char>>& board) {
         solveSudoku(board, 0, 0);
     }
 
-    bool check(vector<vector<char> > &board, int i, int j, char val){
+    bool check(vector<vector<char>> &board, int i, int j, char val){
         int row = i - i%3, column = j - j%3;
         for(int x=0; x<9; x++) if(board[x][j] == val) return false;
         for(int y=0; y<9; y++) if(board[i][y] == val) return false;
@@ -24,7 +24,7 @@ public:
         return true;
     }
 
-    bool solveSudoku(vector<vector<char> > &board, int i, int j){
+    bool solveSudoku(vector<vector<char>> &board, int i, int j){
         if(i==9) return true;
         if(j==9) return solveSudoku(board, i+1, 0);
         if(board[i][j] != '.') return solveSudoku(board, i, j+1);
@@ -55,7 +55,7 @@ int main(){
         {'.','6','.','.','.','.','2','8','.'},
         {'.','.','.','4','1','9','.','.','5'},
         {'.','.','.','.','8','.','.','7','9'}
-        };
+    };
 
     Solution s;
 
