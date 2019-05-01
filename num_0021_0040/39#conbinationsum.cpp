@@ -1,6 +1,14 @@
 /**
  * 39. Combination Sum
  * 
+ * Given a collection of candidate numbers (candidates) and a target number (target), 
+ * find all unique combinations in candidates where the candidate numbers sums to target.
+ * 
+ * Each number in candidates may only be used once in the combination.
+ * 
+ * Note:
+ *  - All numbers (including target) will be positive integers.
+ *  — The solution set must not contain duplicate combinations.
  */
 
 #include <stdio.h>
@@ -13,6 +21,7 @@ public:
     vector<vector<int> > re;
 
     vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+        // 暂存单个解的元素集
         vector<int> comb;
         for (int i = 0; i < candidates.size(); i++)
             fun(candidates, target - candidates[i], i, comb);
