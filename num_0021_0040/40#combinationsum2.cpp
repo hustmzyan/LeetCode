@@ -16,33 +16,27 @@
 #include <vector>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
     vector<vector<int> > res;
 
-    vector<vector<int> > combinationSum2(vector<int> &candidates, int target)
-    {
+    vector<vector<int> > combinationSum2(vector<int> &candidates, int target) {
         sort(candidates.begin(), candidates.end()); // sort can make it easier to process
         vector<int> single;
         backt(candidates, target, 0, single, res);
         return res;
     }
 
-    void backt(vector<int> &candidates, int target, int idx, vector<int> single, vector<vector<int> > &res)
-    {
-        for (int i = idx; i < candidates.size(); i++)
-        {
+    void backt(vector<int> &candidates, int target, int idx, vector<int> single, vector<vector<int> > &res) {
+        for (int i = idx; i < candidates.size(); i++) {
             if (candidates[i] > target) // stop for loop since there is no possibility to meet the target.
                 break;
-            else if (candidates[i] == target)
-            {
+            else if (candidates[i] == target) {
                 single.push_back(candidates[i]);
                 res.push_back(single);
                 break; // stop for loop since all the requirement had been met
             }
-            else
-            {
+            else {
                 /* take it */
                 single.push_back(candidates[i]);
                 backt(candidates, target - candidates[i], i + 1, single, res);
