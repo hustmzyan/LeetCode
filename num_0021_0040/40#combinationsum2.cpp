@@ -61,14 +61,14 @@ int main()
 
     Solution s;
 
-    s.combinationSum2(candidates, 5);
+    vector<vector<int> > result = s.combinationSum2(candidates, 5);
 
-    for (int i; i < s.res.size(); i++)
+    for (int i; i < result.size(); i++)
     {
         cout << '[';
-        for (int j = 0; j < s.res[i].size(); j++)
+        for (int j = 0; j < result[i].size(); j++)
         {
-            cout << s.res[i][j] << ',';
+            cout << result[i][j] << ',';
         }
         cout << ']' << endl;
     }
