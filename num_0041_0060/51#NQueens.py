@@ -17,7 +17,8 @@ class Solution:
             if p==n: # 满足条件，结束判定
                 result.append(queens)
                 return None
-            for q in range(n): # 逐行遍历
+            for q in range(n):  # 逐行遍历
+                # (p, q)为皇后坐标，p-q 用于判定45°，p+q 用于判定135°方向
                 if q not in queens and p - q not in xy_dif and p + q not in xy_sum:
                     print(queens, xy_dif, xy_sum)
                     DFS(queens + [q], xy_dif + [p - q], xy_sum + [p + q])  # 深度优先进行递归
