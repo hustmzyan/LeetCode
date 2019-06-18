@@ -27,7 +27,7 @@ class Solution:
         dp = [[1 for _ in range(n)] for _ in range(m)]
         for i in range(1, m):
             for j in range(1, n):
-                dp[i][j] = dp[i-1][j] + dp[i][j-1]
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
         return dp[-1][-1]
 
     # O(n) space 
@@ -41,7 +41,7 @@ class Solution:
         return cur[-1]
 
 def main():
-    print(Solution().uniquePaths_on(23, 12))
+    print(Solution().uniquePaths_dp(32, 12))
 
 if __name__ == "__main__":
     main()
