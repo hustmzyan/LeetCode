@@ -21,6 +21,7 @@ class Solution:
         len_of_i = len(obstacleGrid)
         len_of_j = len(obstacleGrid[0])
         dp = [[0 for x in range(len_of_j)] for y in range(len_of_i)] 
+        print(dp)
         
         for i in range(0, len_of_i):
             for j in range(0, len_of_j):
@@ -32,7 +33,8 @@ class Solution:
                     if j - 1 >= 0:
                         dp[i][j] += dp[i][j-1]
                     if i - 1 >= 0:
-                        dp[i][j] += dp[i-1][j]
+                        dp[i][j] += dp[i - 1][j]
+                print(dp)
                 
         return dp[len_of_i-1][len_of_j-1]
 
