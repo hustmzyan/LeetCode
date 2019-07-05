@@ -15,7 +15,8 @@ class Solution:
             if token in ('', '.'):
                 pass
             elif token == '..':
-                if stack: stack.pop()
+                if stack:
+                    stack.pop()
             else:
                 stack.append(token)
         return '/' + '/'.join(stack)
