@@ -31,14 +31,14 @@ class Solution:
         :type word2: str
         :rtype: int
         """
-        l1, l2 = len(word1)+1, len(word2)+1
+        l1, l2 = len(word1) + 1, len(word2) + 1
         dp = list(range(l2))
         pre = 0
         for i in range(1, l1):
-            pre, dp[0] = i-1, i
+            pre, dp[0] = i - 1, i
             for j in range(1, l2):
                 buf = dp[j]
-                dp[j] = min(dp[j]+1, dp[j-1]+1, pre+(word1[i-1]!=word2[j-1]))
+                dp[j] = min(dp[j] + 1, dp[j - 1] + 1, pre + (word1[i - 1] != word2[j - 1]))
                 pre = buf
         return dp[-1]
 
