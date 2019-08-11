@@ -42,7 +42,7 @@ def main():
     node5 = ListNode(4)
     node6 = ListNode(4)
     node7 = ListNode(5)
-    
+
     node1.next = node2
     node2.next = node3
     node3.next = node4
@@ -52,7 +52,7 @@ def main():
 
     node = Solution().deleteDuplicates(node1)
 
-    while node.next:
+    while node:
         print(node.val)
         node = node.next
 
