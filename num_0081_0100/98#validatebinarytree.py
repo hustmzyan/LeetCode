@@ -12,6 +12,9 @@ class TreeNode:
 
 class Solution:
     def isValidBST(self, root):
+        """
+        在基于中序遍历的基础上修改
+        """
         result, stack = [], [(root, False)]
 
         while stack:
