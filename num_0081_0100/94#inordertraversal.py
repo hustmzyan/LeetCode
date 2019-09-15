@@ -24,6 +24,9 @@ class TreeNode:
 
 class Solution:
     def inorderTraversal(self, root) :
+        """
+        树的中序遍历转化为栈来解决
+        """
         result, stack = [], [(root, False)]
 
         while stack:
