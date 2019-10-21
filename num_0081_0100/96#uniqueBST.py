@@ -6,14 +6,12 @@ return num of uBST
 
 class Solution:
     def numTrees(self, n):
-        if n == 0 or n == 1:
-            return 1
-        Result = 0
-        for i in range(n):
-            LeftTrees = self.numTrees(i)
-            RightTrees = self.numTrees(n - i - 1)
-            Result += LeftTrees * RightTrees
-        return Result
+        res = [0] * (n+1)
+        res[0] = 1
+        for i in range(1, n+1):
+            for j in range(i):
+                res[i] += res[j] * res[i-1-j]
+        return res[n]
 
 
 def main():
